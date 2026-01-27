@@ -1,9 +1,11 @@
 import './App.css'
+import './Ranking/Ranking'
+import Ranking from './Ranking/Ranking'
 
 function App() {
   return (
     <>
-      <p>Hello world</p>
+      <Ranking name='Mario bak'></Ranking>
     </>
   )
 }
