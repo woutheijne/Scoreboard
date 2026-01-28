@@ -1,5 +1,7 @@
 import type React from "react";
 import { useEffect, useState } from "react";
+import './Ranking.scss'
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 interface game {
 	name: string;
@@ -50,11 +52,37 @@ const Ranking: React.FC<game> = (game) => {
 
 	if (loading) return <p>Loading...</p>
 	if (error) return <p>Error: {error}</p>
-	if (data) return <ul>
-		{Object.entries(data).map(([name, value]) => (
-			<li>{name}: {value}</li>
-		))}
-	</ul>
+	if (data) {
+		const filtered = Object.entries(data).filter(([_, value]) => value!="")
+		let ranked = null
+		const parseTimeSeconds = (str:string) => {
+			const [m,s] = str.split(':').map(Number);
+			return (m*60) + s;
+		}
+		if (game.name == 'bierspuit') {
+			ranked = filtered.sort((a,b) => parseTimeSeconds(a[1]) - parseTimeSeconds(b[1]))
+		} else {
+			ranked = filtered.sort((a,b) => parseFloat(b[1]) - parseFloat(a[1]))
+		}
+		const mapped = ranked.map(([name, value], index) => ({
+				rank: index + 1,
+				name: name,
+				score: value
+			}))
+		return (
+		
+		<div className="scores">
+			{Object.entries(mapped).map(([, record], ) => (
+				<div className="score-row row record" key={record.name}>
+					{record.rank==1 ? null : <div className="rule"></div>}
+					<div className="score-rank col-2">{record.rank + (record.rank==1 ? 'st' : (record.rank==2 ? 'nd' : 'th'))}</div>
+					<div className="score-name col-5">{record.name}</div> 
+					<div className="col-2"></div>
+					<div className="score-value col-3">{record.score}</div>
+				</div>
+			))}
+		</div>)
+	}
 }
 
 export default Ranking
