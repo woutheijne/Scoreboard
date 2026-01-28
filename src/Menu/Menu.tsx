@@ -5,6 +5,7 @@ interface props {
 	games: string[];
 	setPage: React.Dispatch<React.SetStateAction<string>>
 	setIsActive: React.Dispatch<React.SetStateAction<boolean>>
+	setSyncData: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 const Menu: React.FC<props> = (props) => {
@@ -21,7 +22,8 @@ const Menu: React.FC<props> = (props) => {
 						<li onClick={() => props.setPage(game)}>{game}</li>
 					</div>
 				)): <div><div className="rule"></div><li style={{cursor:'default'}}>Laden...</li></div>}
-				{/* <div className="rule"></div> */}
+				<div className="rule"></div>
+				<li onClick={() => props.setSyncData(prev => !prev)}>Verversen</li>
 			</ul>
 		</div>
 	)

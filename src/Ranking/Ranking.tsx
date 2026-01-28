@@ -12,20 +12,24 @@ const Ranking: React.FC<game> = (game) => {
 	if (!game.scores) return <div>No scores</div>
 	const filtered = Object.entries(game.scores).filter(([_, value]) => value != "")
 	let ranked = null
-	const parseTimeSeconds = (str: string) => {
-		const [m, s] = str.split(':').map(Number);
-		return (m * 60) + s;
+
+	const parseTime = (str: string) => {
+		const l= str.split(':').map(Number).map((n, i) => {return n*(100**-i)})
+		return l.reduce((a,b) => a+b, 0)
 	}
-	if (game.name == 'bierspuit') {
-		ranked = filtered.sort((a, b) => parseTimeSeconds(a[1]) - parseTimeSeconds(b[1]))
+
+	if (/^\d*:\d*[:\d*]*$/.test(Object.values(game.scores)[0])) {
+		ranked = filtered.sort((a, b) => parseTime(a[1]) - parseTime(b[1]))
 	} else {
 		ranked = filtered.sort((a, b) => parseFloat(b[1]) - parseFloat(a[1]))
 	}
+
 	const mapped = ranked.map(([name, value], index) => ({
 		rank: index + 1,
 		name: name,
 		score: value
 	}))
+	
 	return (
 
 		<div className="scores">
