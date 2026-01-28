@@ -14,7 +14,7 @@ const Menu: React.FC<props> = (props) => {
 		<div className="menu-block">
 			
 			<ul id="menu" className="">
-				<li onClick={() => {props.setIsActive(true);props.setPage(props.games[0])}}>Loop</li>
+				<li onClick={() => {props.setIsActive(true);props.setPage(props.games[0])}}>loopen</li>
 				{(props.games.length !== 0) ?
 				props.games.map((game) => (
 					<div key={game}>
