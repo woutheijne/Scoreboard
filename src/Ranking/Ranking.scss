@@ -6,6 +6,14 @@
 	font-size: 40px;
 	font-weight: bolder;
 
+	h1 {
+		font-size: 70px;
+		color: rgb(255, 93, 93);
+		-webkit-text-stroke: 4px black;
+		font-weight: bolder;
+		font-family: 'mario';
+	}
+
 
 	.record {
 		background-color: rgba(255, 255, 255, 0.1);
@@ -19,8 +27,8 @@
 		}
 
 		.score-name {
-			-webkit-text-stroke: 1px white;
-			color: black;
+			-webkit-text-stroke: 2px black;
+			color: white;
 		}
 
 		.score-value {
@@ -29,8 +37,9 @@
 		}
 
 		.score-rank {
-			-webkit-text-stroke: 2px black;
+			-webkit-text-stroke: 3px black;
 			color: white;
+			font-family: 'mario';
 		}
 	}
 }
