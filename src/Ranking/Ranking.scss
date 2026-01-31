@@ -43,6 +43,17 @@
 		}
 	}
 
+	.edit-img {
+		background-color: rgb(255, 208, 0);
+	}
+
+	.add-img {
+		top: 120px;
+		right: 50px;
+		background-color: rgb(255, 208, 0);
+		padding: 3px;
+	}
+
 	@media (max-width:768px) {
 		.record {
 			font-size: 25px;
