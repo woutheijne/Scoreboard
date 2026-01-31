@@ -2,26 +2,30 @@ import type React from "react";
 import './menu.scss'
 
 interface props {
-	games: string[];
+	games: Record<string,string>;
+	loading: boolean
 	setPage: React.Dispatch<React.SetStateAction<string>>
 	setIsActive: React.Dispatch<React.SetStateAction<boolean>>
 	setSyncData: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 const Menu: React.FC<props> = (props) => {
+	const games = Object.keys(props.games)
 	
 	return (
 		<div className="menu-block">
 			
 			<ul id="menu" className="">
-				<li onClick={() => {props.setIsActive(true);props.setPage(props.games[0])}}>loopen</li>
-				{(props.games.length !== 0) ?
-				props.games.map((game) => (
+				{(games.length !== 0 && !props.loading) ?
+				<>
+				<li onClick={() => {props.setIsActive(true);props.setPage(games[0])}}>loopen</li>
+				{games.map((game) => (
 					<div key={game}>
 						<div className="rule"></div>
 						<li onClick={() => props.setPage(game)}>{game}</li>
 					</div>
-				)): <div><div className="rule"></div><li style={{cursor:'default'}}>Laden...</li></div>}
+				))}
+				</>: <div><div className="rule"></div><li style={{cursor:'default'}}>Laden...</li></div>}
 				<div className="rule"></div>
 				<li onClick={() => props.setSyncData(prev => !prev)}>Verversen</li>
 			</ul>
