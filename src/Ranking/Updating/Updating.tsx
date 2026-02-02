@@ -8,7 +8,7 @@ interface responseType {
   data?: Record<string,Record<string,string>>
 }
 
-const base = "https://script.google.com/macros/s/AKfycbxRvLMejH70Be5lxRufIJ5Wx_PouEdwUgZ_LiAbCx8NG2oxZOXUzWY7xgr_s0me8Bjx/exec"
+const base = "https://script.google.com/macros/s/AKfycby9YuT6M7edvR95BGG3RS4G6ETLy6pqVMoSx4zvJ7Ysw9Q5gHV6xJwX7M_5OX_DNoL8/exec"
 
 const Updating: React.FC<{ game: {name:string,type:string,list:boolean}, setEditActive: React.Dispatch<React.SetStateAction<boolean>>, setSyncData: React.Dispatch<React.SetStateAction<boolean>>, record:{name:string,rank:number,score:string}}> = ({ game, setEditActive, setSyncData, record}) => {
 	const [formData, setFormData] = useState({ name: record.name, score: game.type=='count' && record.score!='' ? parseInt(record.score)+1 : record.score })
