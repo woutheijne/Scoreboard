@@ -76,7 +76,7 @@ const Ranking: React.FC<game> = (game) => {
 					<div className="score-name col-5">{record.name}</div>
 					<div className="col-1"></div>
 					<div className="score-value col-3">{record.score}</div>
-					{lst?'':<div className="col-1"><img className="edit-img" src={type=='count'?"plus.png":"edit.png"} alt="" onClick={() => handleClick(record)}/></div>}
+					{lst?'':<div className="col-1 add-btn"><img className="edit-img" src={type=='count'?"plus.png":"edit.png"} alt="" onClick={() => handleClick(record)}/></div>}
 				</div>
 			)):''}
 			<div className="updating-container">{editActive?<Updating game={{name:game.name, type:type, list:lst}} setEditActive={setEditActive} setSyncData={game.setSyncData} record={record}></Updating>:''}
