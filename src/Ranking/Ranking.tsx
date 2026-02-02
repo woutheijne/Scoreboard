@@ -67,7 +67,7 @@ const Ranking: React.FC<game> = (game) => {
 	return (
 
 		<div className="scores">
-			<img className='add-img' src="plus.png" alt="" onClick={()=>handleClick({rank:0,name:'',score:''})}/>
+			<img className='add-img btn-img' src="plus.png" alt="" onClick={()=>handleClick({rank:0,name:'',score:''})}/>
 			<h1>{game.name}</h1>
 			{game.scores? Object.entries(mapped).map(([, record],) => (
 				<div className="score-row row record" key={record.rank}>
@@ -76,7 +76,7 @@ const Ranking: React.FC<game> = (game) => {
 					<div className="score-name col-5">{record.name}</div>
 					<div className="col-1"></div>
 					<div className="score-value col-3">{record.score}</div>
-					{lst?'':<div className="col-1"><img className="edit-img" src={type=='count'?"plus.png":"edit.png"} alt="" onClick={() => handleClick(record)}/></div>}
+					{lst?'':<div className="col-1"><img className="edit-img btn-img" src={type=='count'?"plus.png":"edit.png"} alt="" onClick={() => handleClick(record)}/></div>}
 				</div>
 			)):''}
 			<div className="updating-container">{editActive?<Updating game={{name:game.name, type:type, list:lst}} setEditActive={setEditActive} setSyncData={game.setSyncData} record={record}></Updating>:''}
