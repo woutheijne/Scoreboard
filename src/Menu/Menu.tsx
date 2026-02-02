@@ -7,6 +7,7 @@ interface props {
 	setPage: React.Dispatch<React.SetStateAction<string>>
 	setIsActive: React.Dispatch<React.SetStateAction<boolean>>
 	setSyncData: React.Dispatch<React.SetStateAction<boolean>>
+	setSyncActive: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 const Menu: React.FC<props> = (props) => {
@@ -27,7 +28,7 @@ const Menu: React.FC<props> = (props) => {
 				))}
 				</>: <div><div className="rule"></div><li style={{cursor:'default'}}>Laden...</li></div>}
 				<div className="rule"></div>
-				<li onClick={() => props.setSyncData(prev => !prev)}>Verversen</li>
+				<li onClick={() =>{ props.setSyncData(prev => !prev);props.setSyncActive(true)}}>Verversen</li>
 			</ul>
 		</div>
 	)

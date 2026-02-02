@@ -5,6 +5,7 @@ import Ranking from './Ranking/Ranking'
 import Menu from './Menu/Menu'
 import { useEffect, useState } from 'react'
 import Timer from './Timer'
+import SyncTimer from './syncTimer'
 // import Updating from './Updating/Updating'
 
 interface responseType {
@@ -20,18 +21,19 @@ interface responseType {
 function App() {
   const [page, setPage] = useState<string>('menu')
   const [lastPage, setlastPage] = useState<string>('menu')
-
+  
   function handleMenuClick() {
     if (page == 'menu') {setPage(lastPage)}
     else {setlastPage(page); setPage('menu')}
     setIsActive(false)
   }
-
+  
   const [scoreData, setData] = useState<Record<string, Record<string,string>> | null>(null)
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null)
   const [games, setGames] = useState<Record<string,string>>({})
   const [syncData, setSyncData] = useState<boolean>(false)
+  const setSyncActive = SyncTimer(setSyncData)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -60,7 +62,7 @@ function App() {
         setError(err instanceof Error ? err.message : 'error occured')
       } finally {
         setLoading(false)
-        // console.log('Finished syncronization')
+        console.log('Finished syncronization')
       }
     };
 
@@ -77,7 +79,7 @@ function App() {
       <img className='menu-img btn-img' src="logo.jpeg" alt="" onClick={handleMenuClick} />
       {/* <img className='edit-img' src="edit.png" alt="" onClick={handleEditClick}/> */}
       {page == 'menu' ? <div className='menu-container'>
-        <Menu loading={loading} games={games} setPage={setPage} setIsActive={setIsActive} setSyncData={setSyncData}></Menu></div> : 
+        <Menu setSyncActive={setSyncActive} loading={loading} games={games} setPage={setPage} setIsActive={setIsActive} setSyncData={setSyncData}></Menu></div> : 
           scoreData && !error && !loading ? 
             <div className='ranking-container'><Ranking setSyncData={setSyncData} name={page} tpe={games[page]} scores={scoreData[page]}></Ranking></div> : 
             'No data found'}
