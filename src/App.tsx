@@ -80,11 +80,6 @@ function App() {
   useEffect(() => {
     setBackground(getSrc())
   },[page])
-
-  const isVideo = () => {
-    // setBackground(getSrc)
-    return background.endsWith('.mp4')
-  }
   const getSrc = () => {
     const bg = games.backgrounds[page]
     return bg? bg :'mario_kart.mp4'
@@ -93,10 +88,7 @@ function App() {
     <div className='page'>
       <div className="video-container">
         {/* <video autoPlay muted loop playsInline><source type='video/mp4' src={background} onError={(e) => {(e.target as HTMLImageElement).src = 'mario_kart.mp4';}}/></video> */}
-        {isVideo()? 
-          <video autoPlay muted loop playsInline><source type='video/mp4' src={background} onError={(e) => {(e.target as HTMLImageElement).src = 'mario_kart.mp4';}}/></video>:
-          <img src={background} onEmptied={(e) => {(e.target as HTMLImageElement).src = 'logo.jpeg';}} alt="" />
-        }
+        <img src={background} onEmptied={(e) => {(e.target as HTMLImageElement).src = 'logo.jpeg';}} alt="" />
       </div>
       <img className='menu-img' src="logo.jpeg" alt="" onClick={handleMenuClick} />
       {/* <img className='edit-img' src="edit.png" alt="" onClick={handleEditClick}/> */}
