@@ -34,6 +34,7 @@ function App() {
   const [error, setError] = useState<string | null>(null)
   const [games, setGames] = useState<{types:Record<string,string>,backgrounds:Record<string,string>}>({types:{},backgrounds:{}})
   const [syncData, setSyncData] = useState<boolean>(false)
+  const [background, setBackground] = useState<string>('background.jpeg')
   const setSyncActive = SyncTimer(setSyncData)
 
   useEffect(() => {
@@ -74,21 +75,24 @@ function App() {
 
   const setIsActive = Timer(setPage, games.types)
 
+  // useEffect(() => {
+  //   setBackground(getSrc())
+  // },[page])
+  const getSrc = () => {
+    const bg = games.backgrounds[page]
+    return bg? bg :'background.jpeg'
+  }
   useEffect(() => {
     setBackground(getSrc())
   },[page])
-  const getSrc = () => {
-    const bg = games.backgrounds[page]
-    return bg? bg :'mario_kart.mp4'
-  }
   return (
     <div className='page'>
       {/* <div className="video-container"><video autoPlay muted loop playsInline> <source src="mario_kart.mp4" type="video/mp4" /></video></div> */}
-      <div className="video-container"><img src="background.jpeg" alt="" /></div>
+      <div className="video-container"><img src={background} alt="" /></div>
       <img className='menu-img btn-img' src="logo.jpeg" alt="" onClick={handleMenuClick} />
       {/* <img className='edit-img' src="edit.png" alt="" onClick={handleEditClick}/> */}
       {page == 'menu' ? <div className='menu-container'>
-        <Menu setSyncActive={setSyncActive} loading={loading} games={games} setPage={setPage} setIsActive={setIsActive} setSyncData={setSyncData}></Menu></div> : 
+        <Menu setSyncActive={setSyncActive} loading={loading} games={games.types} setPage={setPage} setIsActive={setIsActive} setSyncData={setSyncData}></Menu></div> : 
           scoreData && !error && !loading ? 
             <div className='ranking-container'><Ranking setSyncData={setSyncData} name={page} tpe={games.types[page]} scores={scoreData[page]}></Ranking></div> : 
             'No data found'}
