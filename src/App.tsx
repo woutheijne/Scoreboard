@@ -41,6 +41,7 @@ function App() {
     const fetchData = async () => {
       // console.log('Starting synchronization')
       setLoading(true)
+      setError(null)
       try {
         const response = await fetch("https://script.google.com/macros/s/AKfycby9YuT6M7edvR95BGG3RS4G6ETLy6pqVMoSx4zvJ7Ysw9Q5gHV6xJwX7M_5OX_DNoL8/exec?req=Scores")
 
@@ -55,7 +56,7 @@ function App() {
         }
 
         if (!respData.data) {
-          return new Error('no data returned')
+          throw new Error('no data returned')
         }
         console.log(respData)
         setData(respData.data.scores)
@@ -90,7 +91,7 @@ function App() {
         <Menu setSyncActive={setSyncActive} loading={loading} games={games.types} setPage={setPage} setIsActive={setIsActive} setSyncData={setSyncData}></Menu></div> : 
           scoreData && !error && !loading ? 
             <div className='ranking-container'><Ranking setSyncData={setSyncData} name={page} tpe={games.types[page]} scores={scoreData[page]}></Ranking></div> : 
-            'No data found'}
+            <div className='ranking-container'><h1>{error? error : 'Loading...'}</h1></div>}
       {/* {editActive ? <div className='updating-container'><Updating game={page} setEditActive={setEditActive} setSyncData={setSyncData}></Updating></div> : <></>} */}
     </div>
   )
