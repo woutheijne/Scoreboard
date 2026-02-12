@@ -17,7 +17,7 @@ function Timer (setPage:React.Dispatch<React.SetStateAction<string>>, games:Reco
 			clearInterval(interval)
 		}
 		return () => clearInterval(interval)
-	}, [isActive])
+	}, [isActive, setPage, games])
 
 	return setIsActive
 }

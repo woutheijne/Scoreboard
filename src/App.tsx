@@ -75,16 +75,11 @@ function App() {
 
   const setIsActive = Timer(setPage, games.types)
 
-  // useEffect(() => {
-  //   setBackground(getSrc())
-  // },[page])
-  const getSrc = () => {
-    const bg = games.backgrounds[page]
-    return bg? bg :'background.jpeg'
-  }
   useEffect(() => {
-    setBackground(getSrc())
-  },[page])
+    let  bg = games.backgrounds[page]
+    bg = bg? bg :'background.jpeg'
+    setBackground(bg)
+  },[page, games.backgrounds])
   return (
     <div className='page'>
       {/* <div className="video-container"><video autoPlay muted loop playsInline> <source src="mario_kart.mp4" type="video/mp4" /></video></div> */}

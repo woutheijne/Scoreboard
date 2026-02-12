@@ -39,7 +39,7 @@ const Ranking: React.FC<game> = (game) => {
 		flat = Object.entries(game.scores)
 	}
 	
-	const filtered = flat.filter(([_,v]) => v != '')
+	const filtered = flat.filter(([,v]) => v != '')
 	let ranked:string[][] = []
 	
 	const parseTime = (str: string) => {
