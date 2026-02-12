@@ -11,7 +11,7 @@ function SyncTimer (setSync:React.Dispatch<React.SetStateAction<boolean>>) {
 			}, 300_000)
 		} 
 		return () => clearInterval(interval)
-	}, [syncActive])
+	}, [syncActive, setSync])
 	return setSyncActive
 }
 
