@@ -1,5 +1,5 @@
 .scores {
-	width: min(1000px, 90%);
+	width: min(1000px, 90vw);
 	// background-color: aqua;
 	margin: auto;
 	text-align: center;
@@ -45,6 +45,10 @@
 
 	.edit-img {
 		background-color: rgb(255, 208, 0);
+		width: 30px;
+		height: 30px;
+		position: relative;
+
 	}
 
 	.add-img {
@@ -52,6 +56,13 @@
 		right: 50px;
 		background-color: rgb(255, 208, 0);
 		padding: 3px;
+	}
+
+	.add-btn {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: 0;
 	}
 
 	@media (max-width:768px) {
