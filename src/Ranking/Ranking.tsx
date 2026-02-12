@@ -28,8 +28,6 @@ const Ranking: React.FC<game> = (game) => {
 		lst=false
 		type='none'
 	}
-	
-	// console.log(`Type: ${rev?'reverse ': ''}${type}${lst?' list':''}`)
 
 	let flat
 	
@@ -42,18 +40,13 @@ const Ranking: React.FC<game> = (game) => {
 	const filtered = flat.filter(([,v]) => v != '')
 	let ranked:string[][] = []
 	
-	const parseTime = (str: string) => {
-		const l= str.split(':').map(Number).map((n, i) => {return n*(100**-i)})
-		return l.reduce((a,b) => a+b, 0)
-	}
-	
 	if (type=='time') {
-		ranked = filtered.sort((a,b) => rev ? parseTime(b[1]) - parseTime(a[1]) : parseTime(a[1]) - parseTime(b[1]))
+		ranked = filtered.sort((a,b) => rev ? b[1].localeCompare(a[1], undefined, {numeric:true}) : a[1].localeCompare(b[1], undefined, {numeric:true}))
 	} else if (type=='count') {
 		ranked = filtered.sort((a,b) => rev ? parseFloat(a[1]) - parseFloat(b[1]) : parseFloat(b[1]) - parseFloat(a[1]))
 	}
 
-	const mapped = ranked.slice(0,5).map(([name, value], index) => ({
+	const mapped = ranked.slice(0,10).map(([name, value], index) => ({
 		rank: index + 1,
 		name: name,
 		score: value
