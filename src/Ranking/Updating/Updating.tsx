@@ -19,7 +19,7 @@ const Updating: React.FC<{ game: {name:string,type:string,list:boolean}, setEdit
 
 	const handleSubmit = async () => {
 		if (formData.name == '') return;
-		if (game.type == 'time' && formData.score.toString() !='' && !/^\d*:\d*[:\d*]*$/.test(formData.score.toString())) {console.log('quit on time'); return};
+		if (game.type == 'time' && formData.score.toString() !='' && !/^((\d{1,2}:\d\d(,\d\d)?)|(\d{1,2},\d\d))$/.test(formData.score.toString())) {console.log('quit on time'); return};
 		if (game.type == 'count' && formData.score.toString() != '' && !parseInt(record.score)) {console.log('quit on score');return}
 
 		const setData = async () => {
